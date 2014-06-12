@@ -103,9 +103,10 @@
        * @param {String}   description Description for the keycombo
        * @param {Function} callback    function to execute when keycombo pressed
        * @param {string}   action      the type of event to listen for (for mousetrap)
+       * @param {array}    allowIn     an array of tag names to allow this combo in ('INPUT', 'SELECT', and/or 'TEXTAREA')
        * @param {Boolean}  persistent  Whether the hotkey persists navigation events
        */
-      function Hotkey (combo, description, callback, action, persistent) {
+      function Hotkey (combo, description, callback, action, allowIn, persistent) {
         // TODO: Check that the values are sane because we could
         // be trying to instantiate a new Hotkey with outside dev's
         // supplied values
@@ -113,6 +114,7 @@
         this.description = description;
         this.callback = callback;
         this.action = action;
+        this.allowIn = allowIn;
         this.persistent = persistent;
       }
 
@@ -173,18 +175,21 @@
         purgeHotkeys();
 
         if (route.hotkeys) {
+          var callbackIdx   = 2;
+          var persistentIdx = 5;
+
           angular.forEach(route.hotkeys, function (hotkey) {
             // a string was given, which implies this is a function that is to be
             // $eval()'d within that controller's scope
             // TODO: hotkey here is super confusing.  sometimes a function (that gets turned into an array), sometimes a string
-            var callback = hotkey[2];
+            var callback = hotkey[callbackIdx];
             if (typeof(callback) === 'string' || callback instanceof String) {
-              hotkey[2] = [callback, route];
+              hotkey[callbackIdx] = [callback, route];
             }
 
             // todo: perform check to make sure not already defined:
             // this came from a route, so it's likely not meant to be persistent
-            hotkey[4] = false;
+            hotkey[persistentIdx] = false;
             _add.apply(this, hotkey);
           });
         }
