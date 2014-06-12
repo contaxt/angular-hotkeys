@@ -48,6 +48,13 @@
      */
     this.cheatSheetDescription = 'Show / hide this help menu';
 
+    /**
+     * Configurable setting for the cheat sheet title
+     * @type {String}
+     */
+    this.cheatSheetTitle = 'Keyboard Shortcuts:';
+
+
     this.$get = ['$rootElement', '$rootScope', '$compile', '$window', '$document', function ($rootElement, $rootScope, $compile, $window, $document) {
 
       // monkeypatch Mousetrap's stopCallback() function
@@ -168,7 +175,7 @@
        * Holds the title string for the help menu
        * @type {String}
        */
-      scope.title = 'Keyboard Shortcuts:';
+      scope.title = this.cheatSheetTitle;
 
 
       $rootScope.$on('$routeChangeSuccess', function (event, route) {
