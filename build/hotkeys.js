@@ -1,5 +1,5 @@
 /*! 
- * angular-hotkeys v1.3.1
+ * angular-hotkeys v1.3.2
  * https://chieffancypants.github.io/angular-hotkeys
  * Copyright (c) 2014 Wes Cruver
  * License: MIT
@@ -53,6 +53,13 @@
      * @type {String}
      */
     this.cheatSheetDescription = 'Show / hide this help menu';
+
+    /**
+     * Configurable setting for the cheat sheet title
+     * @type {String}
+     */
+    this.cheatSheetTitle = 'Keyboard Shortcuts:';
+
 
     this.$get = ['$rootElement', '$rootScope', '$compile', '$window', '$document', function ($rootElement, $rootScope, $compile, $window, $document) {
 
@@ -174,7 +181,7 @@
        * Holds the title string for the help menu
        * @type {String}
        */
-      scope.title = 'Keyboard Shortcuts:';
+      scope.title = this.cheatSheetTitle;
 
 
       $rootScope.$on('$routeChangeSuccess', function (event, route) {
