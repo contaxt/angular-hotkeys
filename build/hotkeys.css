@@ -15,10 +15,12 @@
   color: #333;
   font-size: 1em;
   background-color: rgba(255,255,255,0.9);
+  visibility: hidden;
 }
 
 .cfp-hotkeys-container.fade.in {
   z-index: 1024;
+  visibility: visible;
 }
 
 .cfp-hotkeys-title {
@@ -79,6 +81,7 @@
   min-height: 45px;
   min-width: 45px;
   text-align: center;
+  line-height: 45px;
 }
 
 .cfp-hotkeys-close:hover {
